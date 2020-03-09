@@ -1,32 +1,44 @@
 
 
-function game() {
+ffunction game() {
  const winnerScore = 5;
  let playerScore = 0;
  let computerScore = 0;
- 
- for(let i = 0; i < winnerScore; i++) {
- 	//ask for player's selection
-  let playerSelection = prompt("Enter Rock, Paper, Scissors!").toLowerCase();
+ let div = document.querySelector("div");
+ let button = document.querySelectorAll("button");
+ let p = document.createElement("p")
+
+
+
+
+
+
+   for(let i = 0; i < button.length; i++) {
+
+    button[i].addEventListener("click",function (e){
+     let playerSelection = e.target.value ;          
    // generate computer answer
   function computerPlay() { return (["paper","scissors","rock"])[Math.random() * 3 | 0]; }
    let computerSelection = computerPlay();
 
    let round = playRound(playerSelection, computerSelection);
        if(round === "wins") {
-       	playerScore++;
-         console.log("Computer chose: " + computerSelection + " You win!");
+        playerScore++;
+         p.textContent = `You win, computer chose : ${ computerSelection }`
+         div.appendChild(p)
           
         }else if(round === "lost"){
-        	computerScore++  ;
-          console.log("Computer chose: " + computerSelection + " You lose")	
+          computerScore++  ;
+           p.textContent = `You lose, computer chose : ${ computerSelection }`;
+          div.appendChild(p)
            
         }else if(round === "tied") {
-           console.log("Computer chose: " + computerSelection + " You tied. Try again!")
+            p.textContent = `You tied, computer chose : ${ computerSelection }`;
+          div.appendChild(p)
         }
-   }
+  })
  
-
+};
        
     if(playerScore > computerScore ) {
       console.log("You won the game!")
@@ -41,42 +53,40 @@ function game() {
 
 function playRound(playerSelection, computerSelection){
    if(playerSelection === "rock" && computerSelection === "Scissors") {
-   	 return "wins";
-   	}
+     return "wins";
+    }
      else if(computerSelection === "paper") {
-       return "lost"	
+       return "lost"  
      }
        else{
-       return "tied";	
-       } 
+       return "tied";
+       }
  
 
 
 if(playerSelection === "paper" && computerSelection === "rock") {
-   	 return "wins";
-   	}
+     return "wins";
+    }
      else if(computerSelection === "Scissors") {
-       return "lost"	
+       return "lost"  
      }
        else{
-       return "tied";	
-       } 
+       return "tied";
+       }
 
 
 
    if(playerSelection === "Scissors" && computerScore === "paper") {
-   	 return "wins";
-   	}
+     return "wins";
+    }
      else if(computerScore === "rock") {
-       return "lost";	
+       return "lost";
      }
        else{
-       return "tied";	
-       } 
+       return "tied";
+       }
  
    }
 
 
-
-
-
+window.addEventListener('DOMContentLoaded', game);
